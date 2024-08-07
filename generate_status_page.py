@@ -5,7 +5,7 @@ from jinja2 import Template
 
 DATA_FILE = "data.json"
 INCIDENT_FILE = "incident.yaml"
-STATUS_PAGE = "status.html"
+STATUS_PAGE = "index.html"
 TEMPLATE_FILE = "template.html"
 
 def load_data():
