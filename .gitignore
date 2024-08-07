@@ -1,22 +1,7 @@
-
+# Ignore generated status files
 index.html
 data.json
 incident.yaml
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Default files below
 
 
 # Byte-compiled / optimized / DLL files
