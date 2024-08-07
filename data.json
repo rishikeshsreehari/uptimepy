@@ -1,7 +1,13 @@
 [
     {
+<<<<<<< HEAD
         "timestamp": "2024-08-07T18:41:47.911262",
         "status": true,
         "response_time": 0.573243
+=======
+        "timestamp": "2024-08-07T14:40:44.522763",
+        "status": true,
+        "response_time": 0.558321
+>>>>>>> ae5f9e0e2979d6f59a8e858fb13efe3104b5c5be
     }
 ]
