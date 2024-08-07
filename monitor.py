@@ -1,97 +1,98 @@
-import requests
 import json
-import datetime
-import smtplib
-from email.mime.text import MIMEText
 import yaml
-import os
-from generate import main as generate_status_page  # Import the main function from generate.py
+import datetime
+from jinja2 import Template
 
-URL = "http://rishikeshs.com"
 DATA_FILE = "data.json"
 INCIDENT_FILE = "incident.yaml"
-EMAIL = "your-email@gmail.com"
-EMAIL_PASSWORD = "your-email-password"
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
-CHECK_INTERVAL = 15  # in minutes
+STATUS_PAGE = "index.html"
+TEMPLATE_FILE = "template.html"
 
-def send_email(subject, body):
-    msg = MIMEText(body)
-    msg["Subject"] = subject
-    msg["From"] = EMAIL
-    msg["To"] = EMAIL
+def load_data():
+    with open(DATA_FILE, "r") as file:
+        data = json.load(file)
+    return data
 
-    try:
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(EMAIL, EMAIL_PASSWORD)
-            server.sendmail(EMAIL, [EMAIL], msg.as_string())
-        print("Downtime email sent successfully")
-    except Exception as e:
-        print(f"Website down, but unable to send email: {e}")
-
-def check_website():
-    try:
-        response = requests.get(URL, timeout=10)
-        status = response.status_code == 200
-        response_time = response.elapsed.total_seconds()
-    except requests.RequestException:
-        status = False
-        response_time = None
-
-    return status, response_time
-
-def update_data(status, response_time):
-    now = datetime.datetime.now().isoformat()
-    data = {"timestamp": now, "status": status, "response_time": response_time}
-
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as file:
-            records = json.load(file)
-    else:
-        records = []
-
-    records.append(data)
-
-    # Keep records for the last 12 months
-    cutoff = datetime.datetime.now() - datetime.timedelta(days=365)
-    records = [record for record in records if datetime.datetime.fromisoformat(record["timestamp"]) > cutoff]
-
-    with open(DATA_FILE, "w") as file:
-        json.dump(records, file, indent=4)
-
-    if not status:
-        record_incident(now)
-
-def record_incident(timestamp):
-    incident = {"timestamp": timestamp, "reason": "Unknown", "status": "down"}
+def load_incidents():
+    with open(INCIDENT_FILE, "r") as file:
+        incidents = yaml.safe_load(file)
     
-    if os.path.exists(INCIDENT_FILE):
-        with open(INCIDENT_FILE, "r") as file:
-            incidents = yaml.safe_load(file)
-    else:
-        incidents = {"incidents": []}
-
-    incidents["incidents"].append(incident)
+    # Ensure incidents is a dictionary and has the key "incidents"
+    if not isinstance(incidents, dict) or "incidents" not in incidents:
+        return []
     
-    with open(INCIDENT_FILE, "w") as file:
-        yaml.safe_dump(incidents, file)
+    return incidents["incidents"]
+
+def calculate_uptime(data):
+    total_checks = len(data)
+    up_checks = sum(1 for record in data if record["status"])
+    uptime_percentage = round((up_checks / total_checks) * 100) if total_checks else 0
+    return uptime_percentage
+
+def filter_response_time(data):
+    # Filter out records with null response time
+    data = [record for record in data if record["response_time"] is not None]
+    # Sort by timestamp
+    data.sort(key=lambda x: x["timestamp"])
+    # Get the latest 30 values
+    return data[-30:]
+
+def prepare_uptime_data(data):
+    daily_status = {}
+    for record in data:
+        date = record["timestamp"].split("T")[0]
+        if date not in daily_status:
+            daily_status[date] = {"up": 0, "down": 0}
+        if record["status"]:
+            daily_status[date]["up"] += 1
+        else:
+            daily_status[date]["down"] += 1
+    
+    uptime_data = []
+    for date, status in sorted(daily_status.items()):
+        if status["down"] == 0:
+            uptime_data.append({"date": date, "color": "green"})
+        elif status["up"] == 0:
+            uptime_data.append({"date": date, "color": "red"})
+        else:
+            uptime_data.append({"date": date, "color": "yellow"})
+    
+    return uptime_data
+
+def generate_graph_data(data):
+    response_data = filter_response_time(data)
+    timestamps = [record["timestamp"] for record in response_data]
+    response_times = [record["response_time"] * 1000 for record in response_data]  # Convert to ms
+
+    return {
+        "timestamps": timestamps,
+        "response_times": response_times
+    }
+
+def generate_page(data, incidents):
+    uptime_percentage = calculate_uptime(data)
+    graph_data = generate_graph_data(data)
+    uptime_data = prepare_uptime_data(data)
+
+    with open(TEMPLATE_FILE, "r") as file:
+        template_content = file.read()
+        
+    template = Template(template_content)
+
+    html_content = template.render(
+        uptime_percentage=uptime_percentage,
+        incidents=incidents,
+        graph_data=graph_data,
+        uptime_data=uptime_data
+    )
+
+    with open(STATUS_PAGE, "w") as file:
+        file.write(html_content)
 
 def main():
-    status, response_time = check_website()
-    if status:
-        print(f"Website is up with a response time of {response_time:.2f} seconds.")
-    else:
-        print(f"Website is down as of {datetime.datetime.now().isoformat()}")
-
-    update_data(status, response_time)
-
-    if not status:
-        send_email("Website Down", f"The website {URL} is down as of {datetime.datetime.now().isoformat()}.")
-
-    # Generate the status page after updating the data
-    generate_status_page()
+    data = load_data()
+    incidents = load_incidents()
+    generate_page(data, incidents)
 
 if __name__ == "__main__":
     main()
