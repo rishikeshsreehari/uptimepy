@@ -7,16 +7,15 @@
 <body>
     <div class="container">
         <h1>rishikeshs.com Status Page</h1>
-        <div class="uptime">Website is up 100% of the time in the last 12 months.</div>
-        <div class="graph">
-            <canvas id="uptimeChart"></canvas>
+        <div id="overlay">
+            <canvas id="timeline" height="40" width="820"></canvas>
         </div>
         <div class="graph">
             <canvas id="responseTimeChart"></canvas>
         </div>
         <h2>Incident Reports</h2>
         <div class="incidents">
-            
+            <!-- Incident reports will be populated here -->
         </div>
         <footer>
             Status Page &copy; 2024
@@ -26,10 +25,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script>
         const graphData = {
-            timestamps: ["2024-08-07T14:53:18.719086", "2024-08-07T15:09:37.960768"],
-            response_times: [719.337, 714.071]
+            timestamps: ["2024-08-07T18:46:30.060895", "2024-08-07T18:51:35.892493"],
+            response_times: [566.302, 578.429]
         };
-        const uptimeData = [{"color": "green", "date": "2024-08-07"}];
     </script>
     <script src="script.js"></script>
 </body>
