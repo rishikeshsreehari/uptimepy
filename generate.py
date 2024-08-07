@@ -9,13 +9,24 @@ STATUS_PAGE = "index.html"
 TEMPLATE_FILE = "template.html"
 
 def load_data():
-    with open(DATA_FILE, "r") as file:
-        data = json.load(file)
+    try:
+        with open(DATA_FILE, "r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        data = []
     return data
 
 def load_incidents():
-    with open(INCIDENT_FILE, "r") as file:
-        incidents = yaml.safe_load(file)
+    try:
+        with open(INCIDENT_FILE, "r") as file:
+            incidents = yaml.safe_load(file)
+    except FileNotFoundError:
+        incidents = {"incidents": []}
+    
+    # Ensure incidents is a dictionary and has the key "incidents"
+    if not isinstance(incidents, dict) or "incidents" not in incidents:
+        return []
+    
     return incidents["incidents"]
 
 def calculate_uptime(data):
