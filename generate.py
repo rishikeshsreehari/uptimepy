@@ -2,6 +2,7 @@ import json
 import yaml
 import datetime
 from jinja2 import Template
+import os
 
 DATA_FILE = "data.json"
 INCIDENT_FILE = "incident.yaml"
