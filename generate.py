@@ -8,6 +8,16 @@ INCIDENT_FILE = "incident.yaml"
 STATUS_PAGE = "index.html"
 TEMPLATE_FILE = "template.html"
 
+# Ensure data.json exists
+if not os.path.exists(DATA_FILE):
+    with open(DATA_FILE, "w") as file:
+        json.dump([], file)
+
+# Ensure incident.yaml exists
+if not os.path.exists(INCIDENT_FILE):
+    with open(INCIDENT_FILE, "w") as file:
+        yaml.dump({"incidents": []}, file)
+
 def load_data():
     try:
         with open(DATA_FILE, "r") as file:

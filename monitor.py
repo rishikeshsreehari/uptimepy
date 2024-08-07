@@ -16,6 +16,16 @@ SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 CHECK_INTERVAL = 15  # in minutes
 
+# Ensure data.json exists
+if not os.path.exists(DATA_FILE):
+    with open(DATA_FILE, "w") as file:
+        json.dump([], file)
+
+# Ensure incident.yaml exists
+if not os.path.exists(INCIDENT_FILE):
+    with open(INCIDENT_FILE, "w") as file:
+        yaml.dump({"incidents": []}, file)
+
 def send_email(subject, body):
     msg = MIMEText(body)
     msg["Subject"] = subject
