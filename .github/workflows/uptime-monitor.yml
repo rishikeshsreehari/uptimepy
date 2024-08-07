@@ -25,4 +25,8 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git add data.json incident.yaml status.html
           git commit -m "Update uptime data and incident reports"
-          git push
+      - name: Push changes
+        env:
+          PAT: ${{ secrets.PAT }}
+        run: |
+          git push https://$PAT@github.com/rishikeshsreehari/uptimepy.git
