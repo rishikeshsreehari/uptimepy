@@ -5,6 +5,7 @@ import smtplib
 from email.mime.text import MIMEText
 import yaml
 import os
+from generate import main as generate_status_page  # Import the main function from generate.py
 
 URL = "http://rishikeshs.com"
 DATA_FILE = "data.json"
@@ -88,6 +89,9 @@ def main():
 
     if not status:
         send_email("Website Down", f"The website {URL} is down as of {datetime.datetime.now().isoformat()}.")
+
+    # Generate the status page after updating the data
+    generate_status_page()
 
 if __name__ == "__main__":
     main()
