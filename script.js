@@ -1,32 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var uptimeCtx = document.getElementById('uptimeChart').getContext('2d');
-    var responseTimeCtx = document.getElementById('responseTimeChart').getContext('2d');
+    const canvas = document.getElementById("timeline");
+    const ctx = canvas.getContext("2d");
 
-    var uptimeLabels = uptimeData.map(data => data.date);
-    var uptimeColors = uptimeData.map(data => data.color);
+    const stripeWidth = 8;
+    const spacing = 1;
+    
+    // Fetch uptime data
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            const uptimeData = data.map(entry => {
+                return {
+                    color: entry.status ? "green" : "red",
+                    width: stripeWidth
+                };
+            });
 
-    var uptimeChart = new Chart(uptimeCtx, {
-        type: 'bar',
-        data: {
-            labels: uptimeLabels,
-            datasets: [{
-                label: 'Uptime',
-                data: uptimeLabels.map(() => 1),
-                backgroundColor: uptimeColors,
-                borderWidth: 1,
-                fill: false
-            }]
-        },
-        options: {
-            scales: {
-                x: { type: 'time', time: { unit: 'day' } },
-                y: { beginAtZero: true, display: false }
-            },
-            plugins: {
-                legend: { display: false }
-            }
-        }
+            // Draw the uptime data on the canvas
+            uptimeData.forEach((data, i) => {
+                ctx.fillStyle = data.color;
+                const start = i * (stripeWidth + spacing);
+                ctx.fillRect(start, 0, data.width, 40);
+            });
+        });
+
+    const overlay = document.getElementById("overlay");
+    overlay.addEventListener("mousemove", (event) => {
+        console.log(event.offsetX);
     });
+
+    var responseTimeCtx = document.getElementById('responseTimeChart').getContext('2d');
 
     var responseTimeChart = new Chart(responseTimeCtx, {
         type: 'line',
