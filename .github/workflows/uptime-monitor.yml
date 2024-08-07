@@ -29,4 +29,5 @@ jobs:
         env:
           PAT: ${{ secrets.PAT }}
         run: |
-          git push https://$PAT@github.com/rishikeshsreehari/uptimepy.git
+          git remote set-url origin https://$PAT@github.com/${{ github.repository }}
+          git push origin main
