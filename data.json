@@ -1953,5 +1953,10 @@
         "timestamp": "2024-08-12T09:27:01.284437",
         "status": true,
         "response_time": 0.550302
+    },
+    {
+        "timestamp": "2024-08-12T09:35:06.703901",
+        "status": true,
+        "response_time": 0.701782
     }
 ]
