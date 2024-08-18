@@ -4363,5 +4363,10 @@
         "timestamp": "2024-08-18T08:36:37.809989",
         "status": true,
         "response_time": 0.71897
+    },
+    {
+        "timestamp": "2024-08-18T08:47:13.387133",
+        "status": true,
+        "response_time": 0.725942
     }
 ]
