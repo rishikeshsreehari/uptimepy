@@ -5223,5 +5223,10 @@
         "timestamp": "2024-08-20T10:40:27.386968",
         "status": true,
         "response_time": 0.725216
+    },
+    {
+        "timestamp": "2024-08-20T10:47:47.495517",
+        "status": true,
+        "response_time": 0.727439
     }
 ]
