@@ -8153,5 +8153,10 @@
         "timestamp": "2024-08-27T15:10:07.665336",
         "status": true,
         "response_time": 0.702324
+    },
+    {
+        "timestamp": "2024-08-27T15:27:03.881197",
+        "status": true,
+        "response_time": 0.708642
     }
 ]
