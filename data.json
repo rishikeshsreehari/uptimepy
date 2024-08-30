@@ -9243,5 +9243,10 @@
         "timestamp": "2024-08-30T09:47:36.470381",
         "status": true,
         "response_time": 0.710915
+    },
+    {
+        "timestamp": "2024-08-30T10:10:58.984446",
+        "status": true,
+        "response_time": 0.55471
     }
 ]
