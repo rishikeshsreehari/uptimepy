@@ -11228,5 +11228,10 @@
         "timestamp": "2024-09-04T11:08:17.479465",
         "status": true,
         "response_time": 0.559236
+    },
+    {
+        "timestamp": "2024-09-04T11:21:50.563348",
+        "status": true,
+        "response_time": 0.692395
     }
 ]
