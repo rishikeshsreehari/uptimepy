@@ -20138,5 +20138,10 @@
         "timestamp": "2024-09-27T14:10:27.196171",
         "status": true,
         "response_time": 0.18025
+    },
+    {
+        "timestamp": "2024-09-27T14:30:26.399200",
+        "status": true,
+        "response_time": 0.125587
     }
 ]
