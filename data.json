@@ -20058,5 +20058,10 @@
         "timestamp": "2024-09-27T09:11:47.612518",
         "status": true,
         "response_time": 0.094142
+    },
+    {
+        "timestamp": "2024-09-27T09:28:51.387617",
+        "status": true,
+        "response_time": 0.070609
     }
 ]
