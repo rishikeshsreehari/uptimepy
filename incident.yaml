@@ -500,3 +500,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-02T09:11:23.883373'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-02T09:28:40.333848'
