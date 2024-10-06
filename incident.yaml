@@ -1343,3 +1343,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-06T02:18:53.715538'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-06T03:05:16.447566'
