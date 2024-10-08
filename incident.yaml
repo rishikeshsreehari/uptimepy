@@ -1823,3 +1823,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-08T06:15:13.857478'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-08T06:42:51.020856'
