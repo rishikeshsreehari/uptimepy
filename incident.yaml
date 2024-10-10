@@ -2339,3 +2339,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-10T12:56:32.351949'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-10T13:21:42.216036'
