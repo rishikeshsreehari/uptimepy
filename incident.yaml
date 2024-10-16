@@ -3710,3 +3710,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-16T13:39:19.844411'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-16T13:47:11.370996'
