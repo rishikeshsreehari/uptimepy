@@ -4058,3 +4058,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-18T03:25:20.521515'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-18T03:42:15.167095'
