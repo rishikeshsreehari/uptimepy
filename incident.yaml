@@ -4580,3 +4580,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-20T09:34:56.912387'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-20T09:47:30.410310'
