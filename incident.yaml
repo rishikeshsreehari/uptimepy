@@ -5528,3 +5528,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-24T15:47:34.702812'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-24T16:12:34.866872'
