@@ -6470,3 +6470,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-28T19:33:23.428103'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-28T19:47:28.689066'
