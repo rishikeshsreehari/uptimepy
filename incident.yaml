@@ -6380,3 +6380,6 @@ incidents:
 - reason: Unknown
   status: down
   timestamp: '2024-10-28T10:34:40.608774'
+- reason: Unknown
+  status: down
+  timestamp: '2024-10-28T10:48:24.627301'
