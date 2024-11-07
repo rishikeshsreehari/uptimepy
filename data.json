@@ -35493,5 +35493,10 @@
         "timestamp": "2024-11-07T09:36:58.835771",
         "status": false,
         "response_time": 0.017391
+    },
+    {
+        "timestamp": "2024-11-07T09:47:39.831572",
+        "status": false,
+        "response_time": 0.030096
     }
 ]
